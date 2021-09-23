@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import { format } from 'date-fns';
 import { LOG_LEVEL } from '../config';
 
 enum LogLevels {
@@ -15,7 +16,7 @@ const LogColors = {
   ERROR: chalk.red('%s')
 }
 
-function checkLogLevel () {
+function compareLogLevels () {
   return function (
     target: Object,
     key: string | symbol,
@@ -36,7 +37,6 @@ function checkLogLevel () {
 }
 
 /**
- * @todo Add timestamps: '[05-06-2001 - 16:20] ERROR message'
  * @todo Fix newlines (see startup message).
  * @todo Check if LOG_LEVEL matches range or string of valid log levels.
  */
@@ -49,11 +49,12 @@ export class Logger {
   /**
    * A general logger.
    * @param message The message to log.
-   * @param logLevel How severe the message is, see LogLevel.
+   * @param logLevel How severe the message is, see LogLevels.
    */
-  @checkLogLevel()
-  public static log(message: string, logLevel: LogLevels = LogLevels.INFO): void {
-    console.log(LogColors[LogLevels[logLevel]], LogLevels[logLevel], message);
+  @compareLogLevels()
+  public static log (message: string, logLevel: LogLevels = LogLevels.INFO): void {
+    const now = format(new Date(), '[dd-MM-yyyy - HH:mm:ss]');
+    console.log(`${now} ${LogColors[LogLevels[logLevel]]}`, LogLevels[logLevel], message);
   }
   
   public static debug (message: string): void {

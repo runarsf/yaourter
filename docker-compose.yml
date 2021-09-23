@@ -8,10 +8,10 @@ services:
     container_name: "yaourter"
     restart: "no"
     volumes:
-      - "./:/app"
-      #- "/app/node_modules"
+      - "./:/usr/local/yaourter/app"
+      - "exclude:/usr/local/yaourter/app/node_modules/"
     environment:
-      # LOG_LEVEL: "DEBUG" # ∈ [ "DEBUG", "INFO", "WARNING", "ERROR" ]
+      LOG_LEVEL: "DEBUG" # ∈ [ "DEBUG", "INFO", "WARNING", "ERROR" ]
       DISCORD_TOKEN: "${DISCORD_TOKEN:?}"
       CLIENT_ID: "${CLIENT_ID:?}"
       DEV_GUILD_IDS: "${DEV_GUILD_IDS:-}"
@@ -22,3 +22,6 @@ services:
       #  3: Truecolor support (16 million colors)
       FORCE_COLOR: "${FORCE_COLOR:-1}"
     #command: [ "tail", "-f", "/dev/null" ]
+
+volumes:
+    exclude:

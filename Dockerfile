@@ -1,11 +1,15 @@
 FROM node:latest
 
-WORKDIR /app
+WORKDIR /usr/local/yaourter
 
-#COPY package*.json ./
+COPY package*.json ./
+RUN npm install \
+ && npm cache clean --force
+
+ENV PATH=/usr/local/yaourter/node_modules/.bin:$PATH
+
+WORKDIR /usr/local/yaourter/app
+
 COPY . .
 
-RUN npm install
-#&& npm cache clean --force
-
-CMD [ "npm", "start" ]
+CMD [ "bash", "-c", "rm -rf /usr/local/yaourter/app/node_modules/* && npm start" ]

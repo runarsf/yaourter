@@ -49,7 +49,7 @@ export class Logger {
   /**
    * A general logger.
    * @param message The message to log.
-   * @param severity How severe the message is, see LogLevel.
+   * @param logLevel How severe the message is, see LogLevel.
    */
   @checkLogLevel()
   public static log(message: string, logLevel: LogLevels = LogLevels.INFO): void {

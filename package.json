@@ -1,0 +1,40 @@
+{
+  "name": "yaourter",
+  "version": "0.1.0",
+  "description": "A discord bot.",
+  "main": "index.js",
+  "scripts": {
+    "start": "rm -rf dist && tsc --build && node dist/index.js",
+    "build": "rm -rf dist && tsc --build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/runarsf/yaourter.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "typescript"
+  ],
+  "author": "@runarsf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/runarsf/yaourter/issues"
+  },
+  "homepage": "https://github.com/runarsf/yaourter#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.6.0",
+    "@discordjs/rest": "0.1.0-canary.0",
+    "@sapphire/snowflake": "^2.0.0",
+    "chalk": "^4.1.2",
+    "discord-api-types": "^0.20.2",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.9.6",
+    "nodemon": "^2.0.12",
+    "typescript": "^4.4.3"
+  }
+}

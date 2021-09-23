@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  yaourter:
+    image: "yaourter"
+    build: "."
+    hostname: "yaourter"
+    container_name: "yaourter"
+    restart: "no"
+    volumes:
+      - "./:/app"
+      #- "/app/node_modules"
+    environment:
+      # LOG_LEVEL: "DEBUG" # ∈ [ "DEBUG", "INFO", "WARNING", "ERROR" ]
+      DISCORD_TOKEN: "${DISCORD_TOKEN:?}"
+      CLIENT_ID: "${CLIENT_ID:?}"
+      DEV_GUILD_IDS: "${DEV_GUILD_IDS:-}"
+      # Specifies the level of color support.
+      #  0: All colors disabled
+      #  1: Basic color support (16 colors)
+      #  2: 256 color support
+      #  3: Truecolor support (16 million colors)
+      FORCE_COLOR: "${FORCE_COLOR:-1}"
+    #command: [ "tail", "-f", "/dev/null" ]

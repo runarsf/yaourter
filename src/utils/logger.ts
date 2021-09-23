@@ -39,6 +39,7 @@ function compareLogLevels () {
 /**
  * @todo Fix newlines (see startup message).
  * @todo Check if LOG_LEVEL matches range or string of valid log levels.
+ * @todo Support multiple arguments for helper functions. Logger.debug('a', 'b')
  */
 
 /**

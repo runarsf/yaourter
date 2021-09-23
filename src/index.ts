@@ -1,14 +1,18 @@
+import 'module-alias/register';
 import * as fs from 'fs';
 import * as path from 'path';
 const { Client, Collection, Intents } = require('discord.js');
 import { DISCORD_TOKEN } from './config';
-import { Logger } from './utils/logger';
+import { Logger } from '@utils/logger';
+
+/**
+ * @todo Migrate from commonjs to ESM.
+ *  - node-fetch is incompatible with commonjs projects.
+ *  - https://github.com/node-fetch/node-fetch/issues/1279#issuecomment-915062146
+ */
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-/**
- * @todo Use path aliases instead of `path.resolve()`.
- */
 const eventFiles = fs.readdirSync(path.resolve(__dirname, 'events')).filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {

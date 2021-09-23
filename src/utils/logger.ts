@@ -1,6 +1,7 @@
 import chalk from 'chalk';
+import { LOG_LEVEL } from '../config';
 
-enum LogLevel {
+enum LogLevels {
   DEBUG,
   INFO,
   WARNING,
@@ -14,8 +15,30 @@ const LogColors = {
   ERROR: chalk.red('%s')
 }
 
+function checkLogLevel () {
+  return function (
+    target: Object,
+    key: string | symbol,
+    descriptor: PropertyDescriptor
+  ) {
+    const childFunction = descriptor.value;
+    descriptor.value = (...args: any[]) => {
+      if (!args[1]) args[1] = LogLevels.INFO;
+
+      if (args[1] >= LogLevels[LOG_LEVEL]) {
+        return childFunction.apply(this, args);
+      } else {
+        return null;
+      }
+    };
+    return descriptor;
+  };
+}
+
 /**
- * @todo Allow setting log level using environment variable LOG_LEVEL.
+ * @todo Add timestamps: '[05-06-2001 - 16:20] ERROR message'
+ * @todo Fix newlines (see startup message).
+ * @todo Check if LOG_LEVEL matches range or string of valid log levels.
  */
 
 /**
@@ -28,23 +51,24 @@ export class Logger {
    * @param message The message to log.
    * @param severity How severe the message is, see LogLevel.
    */
-  public static log(message: string, severity: LogLevel = LogLevel.INFO): void {
-    console.log(LogColors[LogLevel[severity]], LogLevel[severity], message);
+  @checkLogLevel()
+  public static log(message: string, logLevel: LogLevels = LogLevels.INFO): void {
+    console.log(LogColors[LogLevels[logLevel]], LogLevels[logLevel], message);
   }
   
   public static debug (message: string): void {
-    this.log(message, LogLevel.DEBUG);
+    this.log(message, LogLevels.DEBUG);
   }
 
   public static info (message: string): void {
-    this.log(message, LogLevel.INFO);
+    this.log(message, LogLevels.INFO);
   }
 
   public static warning (message: string): void {
-    this.log(message, LogLevel.WARNING);
+    this.log(message, LogLevels.WARNING);
   }
 
   public static error (message: string): void {
-    this.log(message, LogLevel.ERROR);
+    this.log(message, LogLevels.ERROR);
   }
 }

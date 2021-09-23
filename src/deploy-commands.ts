@@ -3,7 +3,7 @@ import * as path from 'path';
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 import { DISCORD_TOKEN, CLIENT_ID, DEV_GUILD_IDS } from './config';
-import { Logger } from './utils/logger';
+import { Logger } from '@utils/logger';
 
 const commands = [];
 const commandFiles = fs.readdirSync(path.resolve(__dirname, 'commands')).filter(file => file.endsWith('.js'));
@@ -15,6 +15,10 @@ for (const commandFile of commandFiles) {
 
 const rest = new REST({ version: '9' }).setToken(DISCORD_TOKEN);
 
+/**
+ * @todo Add option for application commands, but don't loop through guilds in that case.
+ *  - Export guild membership to a config that can be sourced by this script.
+ */
 for (const devGuildId of DEV_GUILD_IDS) {
   (async () => {
     try {

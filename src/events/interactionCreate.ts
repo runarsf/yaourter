@@ -1,4 +1,4 @@
-import { Logger } from '../utils/logger';
+import { Logger } from '@utils/logger';
 
 module.exports = {
   name: 'interactionCreate',

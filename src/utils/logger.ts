@@ -24,7 +24,7 @@ function compareLogLevels () {
   ) {
     const childFunction = descriptor.value;
     descriptor.value = (...args: any[]) => {
-      if (!args[1]) args[1] = LogLevels.INFO;
+      if (args[1] === undefined) args[1] = LogLevels.INFO;
 
       if (args[1] >= LogLevels[LOG_LEVEL]) {
         return childFunction.apply(this, args);

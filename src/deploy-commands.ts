@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import * as fs from 'fs';
 import * as path from 'path';
 const { REST } = require('@discordjs/rest');
@@ -29,7 +30,7 @@ for (const devGuildId of DEV_GUILD_IDS) {
         { body: commands },
         );
 
-        Logger.log('Successfully reloaded dev guild (/) commands.');
+        Logger.log(`Successfully reloaded dev guild (/) commands for guild ${devGuildId}.`);
       } catch (error) {
         Logger.error(error);
       }

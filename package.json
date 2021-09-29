@@ -6,7 +6,7 @@
   "scripts": {
     "start": "rm -rf dist && tsc --build && node dist/index.js",
     "build": "rm -rf dist && tsc --build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -e ts --exec 'npm run start'"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,10 @@
     "date-fns": "^2.24.0",
     "discord-api-types": "^0.20.2",
     "discord.js": "^13.1.0",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "fast-average-color": "^6.4.2",
+    "node-cache": "^5.1.2",
+    "string-similarity": "^4.0.4"
   },
   "devDependencies": {
     "@types/node": "^16.9.6",

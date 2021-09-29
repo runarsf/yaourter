@@ -7,10 +7,26 @@ import { DISCORD_TOKEN, CLIENT_ID, DEV_GUILD_IDS } from './config';
 import { Logger } from '@utils/logger';
 
 const commands = [];
-const commandFiles = fs.readdirSync(path.resolve(__dirname, 'commands')).filter(file => file.endsWith('.js'));
+const commandFiles: string[] = [];
+//const commandFiles = fs.readdirSync(path.resolve(__dirname, 'commands')).filter(file => file.endsWith('.js'));
+
+fs.readdirSync(path.resolve(__dirname, 'commands'), {withFileTypes: true}).forEach(commandOrCategoryDirent => {
+  if (commandOrCategoryDirent.isDirectory()) {
+    fs.readdirSync(path.resolve(__dirname, 'commands', commandOrCategoryDirent.name), {withFileTypes: true})
+      .filter(dirent => dirent.isFile())
+      .filter(dirent => dirent.name.endsWith('.js'))
+      .forEach(commandDirent => {
+        commandFiles.push(path.resolve(__dirname, 'commands', commandOrCategoryDirent.name, commandDirent.name));
+      });
+  } else if (commandOrCategoryDirent.isFile() && commandOrCategoryDirent.name.endsWith('.js')) {
+    commandFiles.push(path.resolve(__dirname, 'commands', commandOrCategoryDirent.name));
+  }
+});
 
 for (const commandFile of commandFiles) {
   const command = require(path.resolve(__dirname, 'commands', commandFile));
+  Logger.debug(`Found command: ${commandFile}`)
+  // Logger.debug(command.data.toJSON());
   commands.push(command.data.toJSON());
 }
 

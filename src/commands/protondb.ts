@@ -32,6 +32,7 @@ module.exports = {
         .then(res => res.data)
         .catch(err => { return Logger.warning(`Failed to fetch ProtonDB data.\n${err}`) });
       Logger.debug('Finished fetching ProtonDB api');
+      await interaction.editReply('First time fetching ProtonDB api, this might take a while... done!')
       Logger.debug('Caching ProtonDB api-response');
       interaction.client.cache.set('protondb', protonCache, 10800);
       Logger.debug('Finished caching ProtonDB api-response');

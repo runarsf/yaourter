@@ -21,6 +21,7 @@ services:
       DISCORD_TOKEN: "${DISCORD_TOKEN:?}"
       CLIENT_ID: "${CLIENT_ID:?}"
       DEV_GUILD_IDS: "${DEV_GUILD_IDS:-}"
+      # Not required, since steam doesn't seem to care...
       STEAM_API_KEY: "${STEAM_API_KEY:-}"
     #command: [ "bash", "-c", "rm -rf /usr/local/yaourter/app/node_modules/* && npm run dev" ]
     #command: [ "tail", "-f", "/dev/null" ]

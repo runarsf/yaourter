@@ -37,7 +37,7 @@ module.exports = {
       Logger.debug('Finished caching ProtonDB api-response');
     }
 
-    let games: string[] = protonCache.map(obj => obj.title);
+    const games: string[] = protonCache.map(obj => obj.title);
     const bestMatchGameIndex: number = stringSimilarity.findBestMatch(gameName.toLowerCase(), games.map(obj => obj.toLowerCase())).bestMatchIndex;
 
     const protonCacheGameId: string = protonCache[bestMatchGameIndex].appId;

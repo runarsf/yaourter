@@ -11,16 +11,18 @@ services:
       - "./:/usr/local/yaourter/app"
       - "exclude:/usr/local/yaourter/app/node_modules/"
     environment:
-      LOG_LEVEL: "DEBUG" # ∈ [ "DEBUG", "INFO", "WARNING", "ERROR" ]
-      DISCORD_TOKEN: "${DISCORD_TOKEN:?}"
-      CLIENT_ID: "${CLIENT_ID:?}"
-      DEV_GUILD_IDS: "${DEV_GUILD_IDS:-}"
+      LOG_LEVEL: "${LOG_LEVEL:-DEBUG}" # ∈ [ "DEBUG", "INFO", "WARNING", "ERROR" ]
       # Specifies the level of color support.
       #  0: All colors disabled
       #  1: Basic color support (16 colors)
       #  2: 256 color support
       #  3: Truecolor support (16 million colors)
-      FORCE_COLOR: "${FORCE_COLOR:-1}"
+      FORCE_COLOR: "${FORCE_COLOR:-1}" # ∈ [ 0, 1, 2, 3 ]
+      DISCORD_TOKEN: "${DISCORD_TOKEN:?}"
+      CLIENT_ID: "${CLIENT_ID:?}"
+      DEV_GUILD_IDS: "${DEV_GUILD_IDS:-}"
+      STEAM_API_KEY: "${STEAM_API_KEY:-}"
+    #command: [ "bash", "-c", "rm -rf /usr/local/yaourter/app/node_modules/* && npm run dev" ]
     #command: [ "tail", "-f", "/dev/null" ]
 
 volumes:

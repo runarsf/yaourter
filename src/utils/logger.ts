@@ -44,7 +44,11 @@ function compareLogLevels() {
       /**
        * If the LogLevel of the log-message is greater than, or equals to the wanted LogLevel `LOG_LEVEL`, continue, otherwise stop here.
        */
+      // TODO Fix
+      // @ts-ignore
       if (args[1] >= LogLevel[LOG_LEVEL]) {
+        // TODO Fix
+        // @ts-ignore
         return childFunction.apply(this, args);
       } else {
         return null;
@@ -77,6 +81,7 @@ export class Logger {
   public static log(message: string, logLevel: LogLevel = LogLevel.INFO): void {
     const _now = format(new Date(), '[dd-MM-yyyy - HH:mm:ss]');
     const _padding = `${_now} ${LogLevel[logLevel]} `.length;
+    // @ts-ignore TODO
     console.log(`${_now} ${LogColors[LogLevel[logLevel]]}`, LogLevel[logLevel], message.toString().replace(/\n/g, '\n' + ' '.repeat(_padding)));
   }
 

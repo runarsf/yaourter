@@ -60,10 +60,10 @@ export class Yaourter extends Client {
       const _event = require(_eventPath);
       if (_event.once) {
         Logger.debug(`Loading event once: ${_eventPath}`)
-        super.once(_event.name, (...args) => _event.execute(...args));
+        super.once(_event.name, (...args: any) => _event.execute(...args));
       } else {
         Logger.debug(`Loading event dynamically: ${_eventPath}`)
-        super.on(_event.name, (...args) => _event.execute(...args));
+        super.on(_event.name, (...args: any) => _event.execute(...args));
       }
     }
   }
@@ -73,7 +73,7 @@ export class Yaourter extends Client {
    * @param {string} command 
    * @param {string} category 
    */
-  private loadCommand(command: string, category: string = undefined): void {
+  private loadCommand(command: string, category: string | undefined = undefined): void {
     const _commandPath = category === undefined
       ? path.resolve(__dirname, 'commands', command)
       : path.resolve(__dirname, 'commands', category, command);

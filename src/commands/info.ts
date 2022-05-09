@@ -13,7 +13,7 @@ module.exports = {
       subcommand
         .setName('server')
         .setDescription('Info about the server')),
-  async execute(interaction) {
+  async execute(interaction: any) {
     if (interaction.options.getSubcommand() === 'user') {
       const user = interaction.options.getUser('target') || interaction.user;
       await interaction.reply(`Tag: ${user.tag}\nID: ${user.id}`);

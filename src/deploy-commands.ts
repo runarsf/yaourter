@@ -36,6 +36,7 @@ const rest = new REST({ version: '9' }).setToken(DISCORD_TOKEN);
  * @todo Add option for application commands, but don't loop through guilds in that case.
  *  - Export guild membership to a config that can be sourced by this script.
  */
+// @ts-ignore TODO
 for (const devGuildId of DEV_GUILD_IDS) {
   (async () => {
     try {
@@ -48,7 +49,7 @@ for (const devGuildId of DEV_GUILD_IDS) {
 
         Logger.log(`Successfully reloaded dev guild (/) commands for guild ${devGuildId}.`);
       } catch (error) {
-        Logger.error(error);
+        Logger.error(String(error));
       }
     })();
 }

@@ -3,7 +3,7 @@ import {BotCommand} from '../interfaces/botCommand';
 
 module.exports = {
   name: 'interactionCreate',
-  async execute(interaction): Promise<void> {
+  async execute(interaction: any): Promise<void> {
     Logger.debug(`${interaction.user.tag} in >${interaction.guild.name} in #${interaction.channel.name} triggered an interaction.`);
 
     if (!interaction.isCommand()) return;
@@ -15,7 +15,7 @@ module.exports = {
     try {
       await command.execute(interaction);
     } catch (error) {
-      Logger.error(error);
+      Logger.error(String(error));
       await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
     }
   },

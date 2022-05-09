@@ -43,7 +43,7 @@ module.exports = {
       .setRequired(false)
       .addChoice('Fox', 'fox')
       .addChoice('Dog', 'dog')),
-  async execute(interaction) {
+  async execute(interaction: any) {
     const tag_option = interaction.options.getString('tag');
     const tag = tag_option ? `&tag=${tag_option}` : '';
 
@@ -51,7 +51,7 @@ module.exports = {
       const res = await axios.get(`https://floof.runarsf.dev/api/random?type=json${tag}`);
       await interaction.reply(res.data.url);
     } catch (error) {
-      Logger.error(error);
+      Logger.error(String(error));
     }
   },
 };

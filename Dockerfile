@@ -1,4 +1,4 @@
-FROM node:16.6
+FROM node:16.6-alpine
 
 WORKDIR /usr/local/yaourter
 
@@ -12,4 +12,4 @@ WORKDIR /usr/local/yaourter/app
 
 COPY . .
 
-CMD [ "bash", "-c", "rm -rf /usr/local/yaourter/app/node_modules/* && npm start" ]
+CMD [ "sh", "-c", "rm -rf /usr/local/yaourter/app/node_modules/* && npm start" ]
